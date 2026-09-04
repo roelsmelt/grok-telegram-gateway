@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Grok Telegram Gateway">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1220"/>
+      <stop offset="100%" stop-color="#1A2740"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2AABEE"/>
+      <stop offset="100%" stop-color="#7C5CFF"/>
+    </linearGradient>
+  </defs>
+  <!-- background plate -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <rect x="28" y="28" width="456" height="456" rx="80" fill="none" stroke="#2A3548" stroke-width="8"/>
+  <!-- stylized send/chevron gateway mark -->
+  <path d="M128 256 L360 140 L300 256 L360 372 Z" fill="url(#accent)"/>
+  <circle cx="300" cy="256" r="28" fill="#0B1220"/>
+  <path d="M168 256 H268" stroke="#E8EEF8" stroke-width="28" stroke-linecap="round"/>
+</svg>
