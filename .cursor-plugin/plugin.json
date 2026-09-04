@@ -1,0 +1,17 @@
+{
+  "name": "grok-telegram-gateway",
+  "displayName": "Grok Telegram Gateway",
+  "description": "Wire Grok Bot to Telegram via BotFather — long-poll listener, instant webhook wake, typing, send. No native Telegram channel required.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Roel Smelt"
+  },
+  "license": "MIT",
+  "keywords": [
+    "telegram",
+    "grok-bot",
+    "messaging",
+    "webhook"
+  ],
+  "skills": "./skills/"
+}

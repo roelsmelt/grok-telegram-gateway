@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+"""Show typing indicator. Usage: telegram-typing <chat_id|@user|title> [action]"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from telegram_lib import TelegramError, ensure_state, find_chat, send_chat_action
+
+
+def main():
+    ensure_state()
+    if len(sys.argv) < 2:
+        print(
+            "usage: telegram-typing <chat_id|@username|title> [typing|upload_photo|...]",
+            file=sys.stderr,
+        )
+        return 2
+    target = sys.argv[1]
+    action = sys.argv[2] if len(sys.argv) > 2 else "typing"
+    chat_id = target
+    if not target.lstrip("-").isdigit():
+        meta = find_chat(target)
+        if not meta:
+            print(f"unknown chat: {target}", file=sys.stderr)
+            return 1
+        chat_id = meta["id"]
+    try:
+        send_chat_action(chat_id, action)
+    except TelegramError as e:
+        print(f"typing failed: {e}", file=sys.stderr)
+        return 1
+    print(f"ok chat_id={chat_id} action={action}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

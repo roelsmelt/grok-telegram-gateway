@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Drain Telegram getUpdates into local inbox (no token printed)."""
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from telegram_lib import (
+    INBOX_PATH,
+    TelegramError,
+    drain_once,
+    ensure_state,
+    get_me,
+    load_chats,
+)
+
+
+def main():
+    ensure_state()
+    try:
+        me = get_me()
+        stats = drain_once(long_poll=0)
+    except TelegramError as e:
+        print(f"drain failed: {e}", file=sys.stderr)
+        return 1
+    chats = load_chats().get("chats", {})
+    print(
+        json.dumps(
+            {
+                "bot": me.get("username"),
+                "bot_id": me.get("id"),
+                "privacy_all_group_messages": me.get("can_read_all_group_messages"),
+                "can_join_groups": me.get("can_join_groups"),
+                "drain": stats,
+                "known_chats": len(chats),
+                "inbox_path": str(INBOX_PATH),
+            },
+            indent=2,
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

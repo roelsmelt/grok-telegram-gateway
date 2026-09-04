@@ -1,0 +1,10 @@
+# Never publish Telegram secrets
+telegram.json
+**/telegram.json
+**/connector-secrets/
+*.pem
+.env
+.env.*
+__pycache__/
+*.pyc
+.DS_Store
